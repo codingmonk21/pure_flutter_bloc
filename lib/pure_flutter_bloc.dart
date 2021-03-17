@@ -5,4 +5,3 @@ export 'bloc_provider_core.dart';
 export 'bloc_select.dart';
 export 'bloc_widget.dart';
 export 'multi_bloc_listener.dart';
-

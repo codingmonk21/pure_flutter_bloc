@@ -64,11 +64,11 @@ class BlocProvider<T extends Bloc<Object, Object>> extends StatefulWidget
     @required Widget child,
     bool lazy = true,
   }) : this._(
-    key: key,
-    create: create,
-    child: child,
-    lazy: lazy,
-  );
+          key: key,
+          create: create,
+          child: child,
+          lazy: lazy,
+        );
 
   /// `BlocProvider.value` is used to provide an existing instance of
   /// [Bloc] to a new subtree which cannot access the [Bloc] via
@@ -110,10 +110,10 @@ class BlocProvider<T extends Bloc<Object, Object>> extends StatefulWidget
     @required T value,
     @required Widget child,
   }) : this._(
-    key: key,
-    create: () => value,
-    child: child,
-  );
+          key: key,
+          create: () => value,
+          child: child,
+        );
 
   BlocProvider._({
     Key key,
@@ -317,7 +317,7 @@ extension BlocProviderExtension on BuildContext {
   T read<T extends Bloc<Object, Object>>() {
     _assertContext<T>(this);
     final widget =
-    dependOnInheritedWidgetOfExactType<_BlocInheritedProvider<T>>(
+        dependOnInheritedWidgetOfExactType<_BlocInheritedProvider<T>>(
       aspect: _Dummy(),
     );
     return widget == null
@@ -332,17 +332,17 @@ extension BlocProviderExtension on BuildContext {
   S watch<T extends Bloc<S, Object>, S>() {
     _assertContext<T>(this);
     assert(
-    this.widget is LayoutBuilder ||
-        this.widget is SliverWithKeepAliveWidget ||
-        debugDoingBuild,
-    '''
+      this.widget is LayoutBuilder ||
+          this.widget is SliverWithKeepAliveWidget ||
+          debugDoingBuild,
+      '''
           Tried to use `context.watch<$T>` outside of the `build` method.        
           Please consider using `context.read<$T> instead.
       ''',
     );
 
     final widget =
-    dependOnInheritedWidgetOfExactType<_BlocInheritedProvider<T>>();
+        dependOnInheritedWidgetOfExactType<_BlocInheritedProvider<T>>();
 
     return widget == null
         ? throw BlocProviderNotFoundException(this)
@@ -352,8 +352,8 @@ extension BlocProviderExtension on BuildContext {
 
 void _assertContext<T>(final BuildContext context) {
   assert(
-  context != null,
-  '''
+    context != null,
+    '''
       Tried to call context.read/watch on a `context` that is null.
       This can happen when you're trying to use the context of a StatefulWidget 
       and that StatefulWidget is disposed.
@@ -361,8 +361,8 @@ void _assertContext<T>(final BuildContext context) {
   );
 
   assert(
-  T != dynamic,
-  '''
+    T != dynamic,
+    '''
       Tried to call BlocProvider.of<dynamic> which doesn't conform to 
       the implementation details of `BlocProvider` class.       
     ''',
