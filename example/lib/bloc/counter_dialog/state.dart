@@ -6,6 +6,13 @@ class CounterDialogState extends BlocEquatable {
 
   CounterDialogState({@required this.counterVal});
 
+  Map<String, dynamic> toMap() {
+    // ignore: unnecessary_cast
+    return {
+      'counterVal': this.counterVal,
+    } as Map<String, dynamic>;
+  }
+
   CounterDialogState copyWith({
     int counterVal,
   }) {
@@ -19,9 +26,7 @@ class CounterDialogState extends BlocEquatable {
   }
 
   @override
-  List<Map<String, Object>> get propsMap => [
-    {'counterVal': counterVal},
-  ];
+  Map<String, Object> get propsMap => toMap();
 
   @override
   bool get stringify => true;

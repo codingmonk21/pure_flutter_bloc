@@ -17,28 +17,42 @@ abstract class BlocEquatable extends Equatable {
     }
   }
 
-  List<Map<String, Object>> get propsMap;
+  Map<String, Object> get propsMap;
 
   String _mapPropsMapToString(
-      Type runtimeType,
-      List<Map<String, Object>> propsMap,
-      ) {
+    final Type runtimeType,
+    final Map<String, Object> propsMap,
+  ) {
     String propsKeyVal = '';
-    propsMap?.asMap()?.forEach((i, propMap) {
-      propMap?.forEach((k, v) {
-        propsKeyVal +=
-        '$k: ${v?.toString()}${i == propsMap.length - 1 ? "" : ', '}';
-      });
+    propsMap?.forEach((k, v) {
+      if (v is List) {
+        propsKeyVal += '$k: ${v?.length}, ';
+      } else if (v is Set) {
+        propsKeyVal += '$k: ${v?.length}, ';
+      } else if (v is Map) {
+        propsKeyVal += '$k: ${v?.length}, ';
+      } else if (v is Iterable) {
+        propsKeyVal += '$k: ${v?.length}, ';
+      } else {
+        propsKeyVal += '$k: ${v?.toString()}, ';
+      }
     });
+    propsKeyVal = propsKeyVal.trim();
+    if (propsKeyVal.endsWith(',')) {
+      propsKeyVal = propsKeyVal.substring(0, propsKeyVal.length - 1);
+    }
+
     return '$runtimeType($propsKeyVal)';
   }
 
   List<Object> get _equatableProps {
-    return (propsMap == null || propsMap.isEmpty)
-        ? []
-        : propsMap.map((propMap) {
-      return propMap?.forEach((k, v) => v);
-    }).toList();
+    var props = [];
+    if (propsMap == null || propsMap.isEmpty) {
+      return props;
+    } else {
+      propsMap?.forEach((k, v) => props.add(v));
+      return props;
+    }
   }
 
   @override

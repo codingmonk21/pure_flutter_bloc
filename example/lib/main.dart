@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pure_flutter_bloc/bloc_extensions.dart';
 import 'package:pure_flutter_bloc/bloc_provider_core.dart';
-import './screens/counter_screen.dart';
+
 import './bloc/counter_screen/bloc.dart';
 import './bloc/detail_screen/bloc.dart';
+import './screens/counter_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,18 +36,18 @@ class _MyAppState extends State<MyApp> {
     buildInvoked();
     return MultiBlocProvider(
       providers: [
-            (child) => BlocProvider<CounterScreenBloc>(
-          create: () {
-            return CounterScreenBloc();
-          },
-          child: child,
-        ),
-            (child) => BlocProvider<DetailScreenBloc>(
-          create: () {
-            return DetailScreenBloc();
-          },
-          child: child,
-        ),
+        (child) => BlocProvider<CounterScreenBloc>(
+              create: () {
+                return CounterScreenBloc();
+              },
+              child: child,
+            ),
+        (child) => BlocProvider<DetailScreenBloc>(
+              create: () {
+                return DetailScreenBloc();
+              },
+              child: child,
+            ),
       ],
       child: MaterialApp(
         title: 'Bloc App',

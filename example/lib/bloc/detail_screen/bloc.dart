@@ -1,7 +1,8 @@
 import 'package:pure_flutter_bloc/bloc.dart';
-import 'state.dart';
-import 'events.dart';
+
 import 'change.dart';
+import 'events.dart';
+import 'state.dart';
 
 class DetailScreenBloc extends Bloc<DetailScreenState, DetailScreenEvent> {
   @override
@@ -13,12 +14,15 @@ class DetailScreenBloc extends Bloc<DetailScreenState, DetailScreenEvent> {
   }
 
   @override
-  Stream<Change<DetailScreenState>> mapEventToChange(DetailScreenEvent event) async* {
+  Stream<Change<DetailScreenState>> mapEventToChange(
+      DetailScreenEvent event) async* {
     if (event is IncrementDetailScreenCounterEvent) {
-      yield* Stream.value(1).map((value) => IncrementScreenCounterChange(
-            counterVal: value,
-            showLoader: false,
-          ));
+      yield* Stream.value(1).map(
+        (value) => IncrementScreenCounterChange(
+          counterVal: value,
+          showLoader: false,
+        ),
+      );
     }
   }
 }

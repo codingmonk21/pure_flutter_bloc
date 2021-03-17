@@ -1,7 +1,8 @@
 import 'package:pure_flutter_bloc/bloc.dart';
-import 'state.dart';
-import 'events.dart';
+
 import 'change.dart';
+import 'events.dart';
+import 'state.dart';
 
 class CounterScreenBloc extends Bloc<CounterScreenState, CounterEvent> {
   @override
@@ -15,12 +16,15 @@ class CounterScreenBloc extends Bloc<CounterScreenState, CounterEvent> {
   }
 
   @override
-  Stream<Change<CounterScreenState>> mapEventToChange(CounterEvent event) async* {
+  Stream<Change<CounterScreenState>> mapEventToChange(
+      CounterEvent event) async* {
     if (event is IncrementScreenCounterEvent) {
-      yield* Stream.value(1).map((value) => IncrementScreenCounterChange(
-            counterVal: value,
-            showLoader: false,
-          ));
+      yield* Stream.value(1).map(
+        (value) => IncrementScreenCounterChange(
+          counterVal: value,
+          showLoader: false,
+        ),
+      );
     }
 
     if (event is ShowDialogEvent) {
@@ -31,7 +35,10 @@ class CounterScreenBloc extends Bloc<CounterScreenState, CounterEvent> {
 
     if (event is DismissDialogEvent) {
       yield* Stream.value(false).map(
-        (value) => DismissDialogChange(shouldShowDialog: false, dialogCounterVal: event.dialogCounterVal),
+        (value) => DismissDialogChange(
+          shouldShowDialog: false,
+          dialogCounterVal: event.dialogCounterVal,
+        ),
       );
     }
   }
