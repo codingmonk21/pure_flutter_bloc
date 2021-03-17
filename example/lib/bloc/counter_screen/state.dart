@@ -30,6 +30,16 @@ class CounterScreenState extends BlocEquatable {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    // ignore: unnecessary_cast
+    return {
+      'counterVal': this.counterVal,
+      'showLoader': this.showLoader,
+      'shouldShowDialog': this.shouldShowDialog,
+      'dialogCounterVal': this.dialogCounterVal,
+    } as Map<String, dynamic>;
+  }
+
   CounterScreenState({
     @required this.counterVal,
     @required this.showLoader,
@@ -38,12 +48,7 @@ class CounterScreenState extends BlocEquatable {
   });
 
   @override
-  List<Map<String, Object>> get propsMap => [
-    {'counterVal': counterVal},
-    {'shouldShowDialog': shouldShowDialog},
-    {'showLoader': showLoader},
-    {'dialogCounterVal': dialogCounterVal},
-  ];
+  Map<String, Object> get propsMap => toMap();
 
   @override
   bool get stringify => true;

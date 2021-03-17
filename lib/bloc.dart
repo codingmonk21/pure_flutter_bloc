@@ -1,6 +1,7 @@
 library pure_flutter_bloc;
 
 import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -13,7 +14,7 @@ import 'bloc_equatable.dart';
 /// a new event [E] is added to the [Bloc].
 /// {@endtemplate}
 abstract class Bloc<S, E> {
-  static const bool enableDebugLog = false;
+  static bool enableDebugLog = false;
 
   PublishSubject<_StateMachine<S, E>> _sms;
   BehaviorSubject<StateWrapper<S>> _sws;
@@ -40,20 +41,20 @@ abstract class Bloc<S, E> {
     assert(initState() != null);
     state = initState();
     _smsn = _sms.stream.scan<_StateMachine<S, E>>(
-          (_StateMachine previous, _StateMachine emitted, _) {
+      (_StateMachine previous, _StateMachine emitted, _) {
         final current = emitted.change.apply(
           previous.current == null ? previous.previous : previous.current,
         );
         observer.onTransition(Transition<S, E>(
           previous:
-          previous.current == null ? previous.previous : previous.current,
+              previous.current == null ? previous.previous : previous.current,
           current: current,
           event: emitted.event,
         ));
         return _StateMachine(
           current: current,
           previous:
-          previous.current == null ? previous.previous : previous.current,
+              previous.current == null ? previous.previous : previous.current,
           change: emitted.change,
           event: emitted.event,
         );
@@ -71,7 +72,7 @@ abstract class Bloc<S, E> {
         change: stateMachine.change,
       );
     }).listen(
-          (StateWrapper<S> stateWrapper) {
+      (StateWrapper<S> stateWrapper) {
         state = stateWrapper.current;
         _sws.sink.add(stateWrapper);
       },
@@ -85,11 +86,11 @@ abstract class Bloc<S, E> {
 
   /// Function that listens to `Stream` of [StateWrapper]
   StreamSubscription<StateWrapper<S>> listen(
-      void Function(StateWrapper<S> s) onData, {
-        Function onError,
-        void Function() onDone,
-        bool cancelOnError,
-      }) {
+    void Function(StateWrapper<S> s) onData, {
+    Function onError,
+    void Function() onDone,
+    bool cancelOnError,
+  }) {
     return _sws.stream.listen(
       onData,
       onError: onError,
@@ -165,7 +166,12 @@ class _StateMachine<S, E> {
   final E event;
   final Change<S> change;
 
-  _StateMachine({this.previous, this.current, this.event, this.change});
+  _StateMachine({
+    this.previous,
+    this.current,
+    this.event,
+    this.change,
+  });
 }
 
 /// Class that observes the lifecycle and events of all

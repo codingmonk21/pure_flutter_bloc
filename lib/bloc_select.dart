@@ -1,10 +1,10 @@
 library pure_flutter_bloc;
 
 import 'package:collection/collection.dart';
-
 import 'package:flutter/material.dart';
-import 'bloc_extensions.dart';
+
 import 'bloc.dart';
+import 'bloc_extensions.dart';
 import 'bloc_listener.dart';
 import 'bloc_provider_core.dart';
 
@@ -77,8 +77,10 @@ class _SelectState<T extends Bloc<S, Object>, S, R>
     if (widget.enableLifecycleLogs) buildInvoked();
     return BlocListener<T, S>(
       listener: (ctx, previous, current) {
-        bool areEqual = DeepCollectionEquality()
-            .equals(widget.select(previous), widget.select(current));
+        bool areEqual = DeepCollectionEquality().equals(
+          widget.select(previous),
+          widget.select(current),
+        );
         if (!areEqual) {
           setState(() {
             this._value = widget.select(current);

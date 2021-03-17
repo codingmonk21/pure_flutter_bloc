@@ -1,10 +1,11 @@
 library pure_flutter_bloc;
 
 import 'package:flutter/material.dart';
-import 'bloc_extensions.dart';
-import 'bloc_provider_core.dart';
+
 import 'bloc.dart';
+import 'bloc_extensions.dart';
 import 'bloc_listener.dart';
+import 'bloc_provider_core.dart';
 
 /// {@template bloc_widget}
 /// [BlocWidget] rebuilds the UI in response to `state` changes
@@ -55,10 +56,11 @@ class _BlocWidgetState<T extends Bloc<S, Object>, S>
   Widget build(BuildContext context) {
     if (widget.enableLifecycleLogs) buildInvoked();
     return BlocListener<T, S>(
-        listener: (ctx, previous, current) => setState(() => _state = current),
-        child: widget.build(
-          context,
-          _state ?? context.read<T>().state,
-        ));
+      listener: (ctx, previous, current) => setState(() => _state = current),
+      child: widget.build(
+        context,
+        _state ?? context.read<T>().state,
+      ),
+    );
   }
 }

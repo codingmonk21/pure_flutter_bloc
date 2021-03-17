@@ -58,8 +58,8 @@ class MultiBlocListener extends MultiBlocProvider {
     @required Widget child,
   })  : assert(listeners != null && listeners.length > 0),
         super(
-        key: key,
-        providers: listeners,
-        child: child,
-      );
+          key: key,
+          providers: listeners,
+          child: child,
+        );
 }

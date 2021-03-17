@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pure_flutter_bloc/bloc_extensions.dart';
 import 'package:pure_flutter_bloc/pure_flutter_bloc.dart';
 
-import '../bloc/counter_screen/bloc.dart';
-import '../bloc/counter_screen/events.dart';
-import '../bloc/counter_screen/state.dart';
-
 import '../bloc/counter_dialog/bloc.dart';
 import '../bloc/counter_dialog/events.dart';
 import '../bloc/counter_dialog/state.dart';
-
+import '../bloc/counter_screen/bloc.dart';
+import '../bloc/counter_screen/events.dart';
+import '../bloc/counter_screen/state.dart';
 import '../bloc/detail_screen/bloc.dart';
 import '../bloc/detail_screen/state.dart';
 import 'detail_screen.dart';
@@ -27,8 +25,6 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<CounterScreen> {
-  bool isDialogShowing = false;
-
   @override
   Widget build(BuildContext context) {
     buildInvoked();
@@ -111,7 +107,8 @@ class _HomeScreenState extends State<CounterScreen> {
               RaisedButton(
                 child: Text('Rebuild App'),
                 onPressed: () {
-                  Future.delayed(Duration(seconds: 3), () => widget.rebuildApp());
+                  Future.delayed(
+                      Duration(seconds: 3), () => widget.rebuildApp());
                 },
               ),
             ],
@@ -131,14 +128,15 @@ class _HomeScreenState extends State<CounterScreen> {
     );
   }
 
-  Widget bindDataToWidget(CounterScreenState counterState, BuildContext context) {
+  Widget bindDataToWidget(
+    final CounterScreenState counterState,
+    final BuildContext context,
+  ) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          counterState.showLoader
-              ? CircularProgressIndicator()
-              : Container(),
+          counterState.showLoader ? CircularProgressIndicator() : Container(),
           Text('You have pushed the button this many times:'),
           counterTextWidget(counterState.counterVal),
           space(),
@@ -152,11 +150,16 @@ class _HomeScreenState extends State<CounterScreen> {
   }
 
   Widget space() {
-    return SizedBox(height: 20,);
+    return SizedBox(
+      height: 20,
+    );
   }
 
   Widget counterTextWidget(final int value) {
-    return Text('$value',style: Theme.of(context).textTheme.headline4, );
+    return Text(
+      '$value',
+      style: Theme.of(context).textTheme.headline4,
+    );
   }
 
   Widget zeroStateWidget() {
@@ -165,7 +168,7 @@ class _HomeScreenState extends State<CounterScreen> {
     );
   }
 
-  Widget getDialog(BuildContext dialogCtx) {
+  Widget getDialog(final BuildContext dialogCtx) {
     return BlocProvider<CounterDialogBloc>(
       create: () => CounterDialogBloc(),
       child: BlocWidget<CounterDialogBloc, CounterDialogState>(
@@ -179,7 +182,8 @@ class _HomeScreenState extends State<CounterScreen> {
     );
   }
 
-  Widget getDialogContent(BuildContext ctx, CounterDialogState state) {
+  Widget getDialogContent(
+      final BuildContext ctx, final CounterDialogState state) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -190,7 +194,8 @@ class _HomeScreenState extends State<CounterScreen> {
     );
   }
 
-  Widget getDialogButtons(BuildContext context, CounterDialogState state) {
+  Widget getDialogButtons(
+      final BuildContext context, final CounterDialogState state) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -219,7 +224,9 @@ class _HomeScreenState extends State<CounterScreen> {
             ),
           ],
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         Container(
           width: double.infinity,
           child: RaisedButton(

@@ -5,6 +5,14 @@ class DetailScreenState extends BlocEquatable {
   final int counterVal;
   final bool showLoader;
 
+  Map<String, dynamic> toMap() {
+    // ignore: unnecessary_cast
+    return {
+      'counterVal': this.counterVal,
+      'showLoader': this.showLoader,
+    } as Map<String, dynamic>;
+  }
+
   DetailScreenState copyWith({
     int counterVal,
     bool showLoader,
@@ -26,10 +34,7 @@ class DetailScreenState extends BlocEquatable {
   });
 
   @override
-  List<Map<String, Object>> get propsMap => [
-    {'counterVal': counterVal},
-    {'showLoader': showLoader},
-  ];
+  Map<String, Object> get propsMap => toMap();
 
   @override
   bool get stringify => true;

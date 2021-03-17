@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pure_flutter_bloc/pure_flutter_bloc.dart';
+
 import '../bloc/detail_screen/bloc.dart';
-import '../bloc/detail_screen/state.dart';
 import '../bloc/detail_screen/events.dart';
+import '../bloc/detail_screen/state.dart';
 
 class DetailScreen extends StatelessWidget {
   @override
@@ -13,9 +14,7 @@ class DetailScreen extends StatelessWidget {
       ),
       body: BlocWidget<DetailScreenBloc, DetailScreenState>(
         build: (ctx, state) {
-          return state != null
-              ? bindData(state, ctx)
-              : zeroStateWidget();
+          return state != null ? bindData(state, ctx) : zeroStateWidget();
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -30,15 +29,18 @@ class DetailScreen extends StatelessWidget {
     );
   }
 
-  Widget bindData(DetailScreenState counterState, BuildContext context) {
+  Widget bindData(
+    final DetailScreenState counterState,
+    final BuildContext context,
+  ) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          counterState.showLoader
-              ? CircularProgressIndicator()
-              : Container(),
-          Text('You have pushed the button this many times:'),
+          counterState.showLoader ? CircularProgressIndicator() : Container(),
+          Text(
+            'You have pushed the button this many times:',
+          ),
           Text(
             '${counterState.counterVal}',
             style: Theme.of(context).textTheme.headline4,
@@ -50,7 +52,9 @@ class DetailScreen extends StatelessWidget {
 
   Widget zeroStateWidget() {
     return Center(
-      child: Text("There's nothing much here to show...."),
+      child: Text(
+        "There's nothing much here to show....",
+      ),
     );
   }
 }
