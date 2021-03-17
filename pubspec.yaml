@@ -1,6 +1,6 @@
 name: pure_flutter_bloc
 description: A state management package that exposes simple to use widgets to quickly implement BLoc pattern. 
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/codingmonk21/pure_flutter_bloc
 
 environment:
